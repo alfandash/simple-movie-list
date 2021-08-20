@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import actionType from '../redux/actionType';
-import PosterModal from './posterModal'
+import PosterModal from './posterModal';
+import useInfiniteScroll from '../hooks/useInfiniteScroll';
+import axios from "axios";
 
 const MovieList = () => {
   const dispatch = useDispatch();
-  const { movieList } = useSelector((state) => state);
+  const { movieList, movieTitle } = useSelector((state) => state);
+
+  // infinite scroll function and custom hooks
+  const ref = useRef(null);
+  const [isFetching, setIsFetching] = useInfiniteScroll({ callback: handleFetching, ref: ref });
+
+  function handleFetching() {
+    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s="+ movieTitle +"&page=1")
+      .then((resp) => {
+        const { data } = resp;
+        dispatch({ type: actionType.loadMovieList, data: data?.Search || []})
+      })
+      .finally(() => {
+        console.log('mashook')
+        setIsFetching(false)
+      })
+  }
 
   return (
     <>
@@ -25,6 +43,15 @@ const MovieList = () => {
           )
         })
       }
+      <div className="col-12 d-flex justify-content-center py-4 mb-4" ref={ref}>
+        {
+          movieList.length >= 5 && isFetching && (
+            <div className="spinner-border" role="status">
+              <span className="sr-only"/>
+            </div>
+          )
+        }
+      </div>
       </div>
       <PosterModal />
     </>

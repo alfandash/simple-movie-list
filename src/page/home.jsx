@@ -20,6 +20,7 @@ const Home = () => {
       .then((resp) => {
         const { data } = resp;
         dispatch({ type: actionType.loadMovieList, data: data?.Search || []})
+        dispatch({ type: actionType.loadMovieTitle, data: title})
       })
       .finally(() => {
         setIsLoading(false)

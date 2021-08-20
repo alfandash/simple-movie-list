@@ -18,6 +18,11 @@ const reducer = (state = Object.assign({}, initialState), { type, data }) => {
           ...state,
           moviePoster: data,
         }
+    case actionType.loadMovieTitle:
+      return {
+        ...state,
+        movieTitle: data,
+      }
     default:
       return state;
   }
