@@ -26,7 +26,7 @@ const MovieList = () => {
           page
       )
       .then((resp) => {
-        const { datßa } = resp
+        const { data } = resp
         dispatch({ type: actionType.appendMovieList, data: data || [] })
         setPage(page + 1)
       })
