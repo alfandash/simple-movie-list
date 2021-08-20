@@ -1,9 +1,9 @@
-import actionType from './actionType';
+import actionType from "./actionType"
 
 const initialState = {
   movieList: {},
   movie: {},
-  moviePoster: ''
+  moviePoster: "",
 }
 
 const reducer = (state = Object.assign({}, initialState), { type, data }) => {
@@ -26,7 +26,7 @@ const reducer = (state = Object.assign({}, initialState), { type, data }) => {
     case actionType.appendMovieList:
       state.movieList.Search = state.movieList.Search.concat(data.Search)
       return {
-        ...state
+        ...state,
       }
     case actionType.loadMovieTitle:
       return {
@@ -34,8 +34,8 @@ const reducer = (state = Object.assign({}, initialState), { type, data }) => {
         movieTitle: data,
       }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default reducer;
+export default reducer

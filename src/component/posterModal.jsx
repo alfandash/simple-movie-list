@@ -1,15 +1,15 @@
-import React from 'react';
-import { Button, Modal } from "react-bootstrap";
-import { useSelector, useDispatch } from 'react-redux';
-import actionType from '../redux/actionType';
+import React from "react"
+import { Button, Modal } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import actionType from "../redux/actionType"
 
 const PosterModal = () => {
-  const dispatch = useDispatch();
-  const { moviePoster } = useSelector((state) => state);
-  const isShow = moviePoster !== ''
+  const dispatch = useDispatch()
+  const { moviePoster } = useSelector((state) => state)
+  const isShow = moviePoster !== ""
 
   const handleClose = () => {
-    dispatch({ type: actionType.loadMoviePoster, data: ''})
+    dispatch({ type: actionType.loadMoviePoster, data: "" })
   }
 
   return (
@@ -21,4 +21,4 @@ const PosterModal = () => {
   )
 }
 
-export default PosterModal;
+export default PosterModal

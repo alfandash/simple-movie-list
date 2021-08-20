@@ -1,8 +1,7 @@
+import { BrowserRouter, Route } from "react-router-dom"
 
-import { BrowserRouter, Route } from "react-router-dom";
-
-import Home from "./page/home";
-import Detail from "./page/detail";
+import Home from "./page/home"
+import Detail from "./page/detail"
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
         <Route exact path="/" component={Home} />
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import useIntersectionObserver from './useIntersectionObserver';
+import { useState, useEffect } from "react"
+import useIntersectionObserver from "./useIntersectionObserver"
 
 export default function useInfiniteScroll({
   ref = null,
@@ -9,18 +9,18 @@ export default function useInfiniteScroll({
   forward = false,
   callback = () => {},
 }) {
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(false)
 
-  const isBottomVisible = useIntersectionObserver(ref, options, forward);
-
-  useEffect(() => {
-    isBottomVisible && setIsFetching(true);
-  }, [isBottomVisible]);
+  const isBottomVisible = useIntersectionObserver(ref, options, forward)
 
   useEffect(() => {
-    if (!isFetching) return;
-    callback();
-  }, [isFetching]);
+    isBottomVisible && setIsFetching(true)
+  }, [isBottomVisible])
 
-  return [isFetching, setIsFetching];
+  useEffect(() => {
+    if (!isFetching) return
+    callback()
+  }, [isFetching])
+
+  return [isFetching, setIsFetching]
 }

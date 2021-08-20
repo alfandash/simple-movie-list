@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+import Layout from "./layout/defaultLayout"
+
 import MovieDetail from '../component/movieDetail';
 
 const Detail = () => {
@@ -27,24 +29,20 @@ const Detail = () => {
 
   return (
     <>
-      <div className="header">
-        <header className="d-block w-100 text-center">
-          <h1>Movie List</h1>
-        </header>
-      </div>
-      <div className="container">
-        {
-          isLoading ? (
-            <div className="main-loader d-flex w-100 justify-content-center align-items-center">
-              <div className="spinner-border" role="status">
-                <span className="sr-only"/>
-              </div>
+    <Layout>
+      {
+        isLoading ? (
+          <div className="main-loader d-flex w-100 justify-content-center align-items-center">
+            <div className="spinner-border" role="status">
+              <span className="sr-only"/>
             </div>
-          ) : (
-            <MovieDetail {...movieInfo}/>
-          )
-        }
-      </div>
+          </div>
+        ) : (
+          <MovieDetail {...movieInfo}/>
+        )
+      }
+    </Layout>
+      
     </>
   )
 }
