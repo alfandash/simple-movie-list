@@ -13,6 +13,11 @@ const reducer = (state = Object.assign({}, initialState), { type, data }) => {
         ...state,
         movieList: data,
       }
+    case actionType.loadMovie:
+      return {
+        ...state,
+        movie: data,
+      }
     case actionType.loadMoviePoster:
       return {
         ...state,

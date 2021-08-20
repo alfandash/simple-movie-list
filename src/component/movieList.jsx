@@ -33,11 +33,14 @@ const MovieList = () => {
         movieList.Search.map((movie, index) => {
           return (
             <div className="col-12 col-sm-4" key={index}>
-              <div className="card">
+              <div className="card shadow my-2">
                 <img src={movie.Poster} className="card-img-top cursor-pointer" alt={"image-" + index} onClick={() => dispatch({ type: actionType.loadMoviePoster, data: movie.Poster})}/>
                 <div className="card-body">
                   <h3>{movie.Title}</h3>
                   <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href={"/detail/" + movie.imdbID}>
+                    <button type="button" className="btn btn-info">Detail</button>
+                  </a>
                 </div>
               </div>
             </div>

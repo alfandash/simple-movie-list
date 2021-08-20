@@ -14,11 +14,11 @@ const SearchForm = (props) => {
 
   return (
     <>
-      <form className="form-inline" onSubmit={handleSubmit}>
-        <div className="form-group mx-sm-3 mb-2">
+      <form className="form-inline mb-2" onSubmit={handleSubmit}>
+        <div className="form-group mr-3 ">
           <input name="keyword" type="text" className="form-control" id="movie-input" placeholder="Movie Keyword" defaultValue={props?.title}/>
         </div>
-        <button type="submit" className="btn btn-primary mb-2">search</button>
+        <button type="submit" className="btn btn-primary">search</button>
       </form>
     </>
   )

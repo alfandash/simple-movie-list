@@ -1,29 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
-import actionType from '../redux/actionType';
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import SearchForm from "../component/searchForm";
-import MovieList from "../component/movieList";
+import MovieDetail from '../component/movieDetail';
 
-const Home = () => {
+const Detail = () => {
 
-  const dispatch = useDispatch();
-  const [title, setTitle] = useState('batman')
   const [isLoading, setIsLoading] = useState(true)
+  const [movieInfo, setMovieInfo] = useState('')
+  const { id } = useParams()
 
   useEffect(() => {
     setIsLoading(true)
-    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s="+ title +"&page=1")
+    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&i=" + id)
       .then((resp) => {
         const { data } = resp;
-        dispatch({ type: actionType.loadMovieList, data: data || {}})
-        dispatch({ type: actionType.loadMovieTitle, data: title})
+        console.log(data)
+        setMovieInfo(data)
       })
       .finally(() => {
         setIsLoading(false)
       })
-  }, [title])
+  }, [])
 
 
 
@@ -35,11 +33,6 @@ const Home = () => {
         </header>
       </div>
       <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <SearchForm title={title} setTitle={setTitle}/>
-          </div>
-        </div>
         {
           isLoading ? (
             <div className="main-loader d-flex w-100 justify-content-center align-items-center">
@@ -48,7 +41,7 @@ const Home = () => {
               </div>
             </div>
           ) : (
-            <MovieList />
+            <MovieDetail {...movieInfo}/>
           )
         }
       </div>
@@ -56,4 +49,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Detail
