@@ -51,8 +51,8 @@ const MovieList = () => {
           )
         }
       </div>
-      </div>
-      <PosterModal />
+    </div>
+    <PosterModal />
     </>
   )
 }
