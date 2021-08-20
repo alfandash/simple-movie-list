@@ -30,7 +30,7 @@ const MovieList = () => {
     <>
       <div className="row">
       {
-        movieList.Search.map((movie, index) => {
+        movieList?.Search?.map((movie, index) => {
           return (
             <div className="col-12 col-sm-4" key={index}>
               <div className="card shadow my-2">
@@ -45,20 +45,24 @@ const MovieList = () => {
               </div>
             </div>
           )
-        })
+        }) || (
+          <div className="col-12 text-center p-5">
+            <h4>Empty result..</h4>
+          </div>
+        )
       }
       {
-         movieList.Search.length >= 5 && Number(movieList.totalResults) >= page && (
-          <div className="col-12 d-flex justify-content-center py-4 mb-4" ref={ref}>
-          {
-           isFetching && (
-              <div className="spinner-border" role="status">
-                <span className="sr-only"/>
-              </div>
-            )
-          }
-           </div>
-         )
+        movieList?.Search?.length >= 5 && Number(movieList.totalResults) >= page && (
+        <div className="col-12 d-flex justify-content-center py-4 mb-4" ref={ref}>
+        {
+          isFetching && (
+            <div className="spinner-border" role="status">
+              <span className="sr-only"/>
+            </div>
+          )
+        }
+          </div>
+        )
       }
 
     </div>

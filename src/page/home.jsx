@@ -17,7 +17,11 @@ const Home = () => {
     axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s="+ title +"&page=1")
       .then((resp) => {
         const { data } = resp;
-        dispatch({ type: actionType.loadMovieList, data: data || {}})
+        if (data.Response === "True") {
+          dispatch({ type: actionType.loadMovieList, data: data || {}})
+        } else {
+          dispatch({ type: actionType.loadMovieList, data: {}})
+        }
         dispatch({ type: actionType.loadMovieTitle, data: title})
       })
       .finally(() => {
