@@ -20,7 +20,6 @@ const MovieList = () => {
         dispatch({ type: actionType.loadMovieList, data: data?.Search || []})
       })
       .finally(() => {
-        console.log('mashook')
         setIsFetching(false)
       })
   }
