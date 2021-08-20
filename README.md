@@ -50,7 +50,7 @@ This is a simple react project contain movie list based on (http://www.omdbapi.c
 4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
-### Other Available Scripts
+## Other Available Scripts
 
 In the project directory, you can run:
 
