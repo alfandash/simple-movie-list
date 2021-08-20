@@ -9,17 +9,15 @@ import MovieList from "../component/movieList";
 const Home = () => {
 
   const dispatch = useDispatch();
-
-  const [page, setPage] = useState(1)
   const [title, setTitle] = useState('batman')
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
-    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s="+ title +"&page=" + page)
+    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s="+ title +"&page=1")
       .then((resp) => {
         const { data } = resp;
-        dispatch({ type: actionType.loadMovieList, data: data?.Search || []})
+        dispatch({ type: actionType.loadMovieList, data: data || {}})
         dispatch({ type: actionType.loadMovieTitle, data: title})
       })
       .finally(() => {

@@ -10,14 +10,16 @@ const MovieList = () => {
   const { movieList, movieTitle } = useSelector((state) => state);
 
   // infinite scroll function and custom hooks
+  const [ page, setPage ] = useState(1);
   const ref = useRef(null);
   const [isFetching, setIsFetching] = useInfiniteScroll({ callback: handleFetching, ref: ref });
 
   function handleFetching() {
-    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s="+ movieTitle +"&page=1")
+    axios.get("http://www.omdbapi.com?apikey=faf7e5bb&s=" + movieTitle + "&page=" + page)
       .then((resp) => {
         const { data } = resp;
-        dispatch({ type: actionType.loadMovieList, data: data?.Search || []})
+        dispatch({ type: actionType.appendMovieList, data: data || []})
+        setPage(page + 1)
       })
       .finally(() => {
         setIsFetching(false)
@@ -28,7 +30,7 @@ const MovieList = () => {
     <>
       <div className="row">
       {
-        movieList.map((movie, index) => {
+        movieList.Search.map((movie, index) => {
           return (
             <div className="col-12 col-sm-4" key={index}>
               <div className="card">
@@ -42,15 +44,20 @@ const MovieList = () => {
           )
         })
       }
-      <div className="col-12 d-flex justify-content-center py-4 mb-4" ref={ref}>
-        {
-          movieList.length >= 5 && isFetching && (
-            <div className="spinner-border" role="status">
-              <span className="sr-only"/>
-            </div>
-          )
-        }
-      </div>
+      {
+         movieList.Search.length >= 5 && Number(movieList.totalResults) >= page && (
+          <div className="col-12 d-flex justify-content-center py-4 mb-4" ref={ref}>
+          {
+           isFetching && (
+              <div className="spinner-border" role="status">
+                <span className="sr-only"/>
+              </div>
+            )
+          }
+           </div>
+         )
+      }
+
     </div>
     <PosterModal />
     </>
